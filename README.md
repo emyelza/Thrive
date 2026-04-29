@@ -77,7 +77,7 @@ Works with most Indian bank exports (SBI, HDFC, ICICI, Axis, etc.)
 
 Add your deployed link here after deployment:
 ```
-https://your-app.streamlit.app
+https://thrive-jmky7j3ohu3vxo5zp4qc72.streamlit.app
 ```
 
 # Who this is for
@@ -105,4 +105,4 @@ MIT License
 # Author
 
 Your Name
-GitHub: [https://github.com/YOUR_USERNAME](https://github.com/YOUR_USERNAME)
+GitHub: [https://github.com/YOUR_USERNAME](https://github.com/emyelza)
