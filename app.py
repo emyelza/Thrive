@@ -28,19 +28,146 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400;1,9..144,700&family=League+Spartan:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-html, body, [class*="css"], [data-testid="stAppViewContainer"] {
+/* ── Force light theme on ALL Streamlit internals ── */
+html, body,
+[data-testid="stAppViewContainer"],
+[data-testid="stHeader"],
+[data-testid="stToolbar"],
+[data-testid="stDecoration"],
+[data-testid="stStatusWidget"],
+[data-testid="stSidebar"],
+.stApp {
+    background-color: #FAFAF7 !important;
+    color: #1A1A2E !important;
     font-family: 'DM Sans', sans-serif;
-    background-color: #FAFAF7;
     background-image:
         linear-gradient(rgba(214, 211, 240, 0.35) 1px, transparent 1px),
         linear-gradient(90deg, rgba(214, 211, 240, 0.35) 1px, transparent 1px);
     background-size: 40px 40px;
+}
+
+html, body, [class*="css"] {
+    font-family: 'DM Sans', sans-serif;
     color: #1A1A2E;
+}
+
+/* Force all text elements to dark color */
+p, span, label, div, h1, h2, h3, h4, h5, h6, li, td, th,
+.stMarkdown, .stMarkdown * {
+    color: #1A1A2E !important;
 }
 
 /* Hide Streamlit chrome */
 #MainMenu, footer, header { visibility: hidden; }
 .block-container { padding: 2rem 3rem; max-width: 1200px; }
+
+/* ── Fix file uploader ── */
+[data-testid="stFileUploader"],
+[data-testid="stFileUploaderDropzone"] {
+    background-color: #FFFFFF !important;
+    border: 1px dashed #D6D3F0 !important;
+    border-radius: 12px !important;
+}
+[data-testid="stFileUploaderDropzone"] *,
+[data-testid="stFileUploader"] * {
+    color: #1A1A2E !important;
+    background-color: transparent !important;
+}
+[data-testid="stFileUploader"] button,
+[data-testid="stFileUploaderDropzone"] button {
+    background-color: #F0EFF8 !important;
+    color: #5B4FCF !important;
+    border: 1px solid #5B4FCF !important;
+    border-radius: 50px !important;
+}
+
+/* ── Fix ALL buttons (default / secondary) ── */
+div[data-testid="stButton"] button {
+    background-color: #FFFFFF !important;
+    color: #1A1A2E !important;
+    border: 1px solid #D6D3F0 !important;
+    border-radius: 50px !important;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    font-family: 'DM Sans', sans-serif !important;
+}
+div[data-testid="stButton"] button:hover {
+    background-color: #F0EFF8 !important;
+    color: #5B4FCF !important;
+    border-color: #5B4FCF !important;
+}
+
+/* ── Primary button ── */
+div[data-testid="stButton"] button[kind="primary"],
+div[data-testid="stButton"] button[data-testid="baseButton-primary"] {
+    background-color: #5B4FCF !important;
+    color: #FFFFFF !important;
+    border: none !important;
+}
+div[data-testid="stButton"] button[kind="primary"]:hover,
+div[data-testid="stButton"] button[data-testid="baseButton-primary"]:hover {
+    background-color: #4A3EBE !important;
+    color: #FFFFFF !important;
+}
+
+/* ── Download button ── */
+div[data-testid="stDownloadButton"] button {
+    background-color: #FFFFFF !important;
+    color: #5B4FCF !important;
+    border: 1px solid #5B4FCF !important;
+    border-radius: 50px !important;
+    font-family: 'DM Sans', sans-serif !important;
+}
+div[data-testid="stDownloadButton"] button:hover {
+    background-color: #F0EFF8 !important;
+}
+
+/* ── Fix dataframe / tables ── */
+[data-testid="stDataFrame"] {
+    background-color: #FFFFFF !important;
+    border: 1px solid #EBEBEB !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+[data-testid="stDataFrame"] *,
+[data-testid="stDataFrame"] iframe,
+.dvn-scroller, .dvn-scroller * {
+    background-color: #FFFFFF !important;
+    color: #1A1A2E !important;
+}
+
+/* ── Fix number input ── */
+[data-testid="stNumberInput"] input,
+[data-testid="stNumberInput"] div {
+    background-color: #FFFFFF !important;
+    color: #1A1A2E !important;
+    border-color: #D6D3F0 !important;
+}
+
+/* ── Fix selectbox ── */
+[data-testid="stSelectbox"] > div > div,
+[data-testid="stSelectbox"] * {
+    background-color: #FFFFFF !important;
+    color: #1A1A2E !important;
+}
+
+/* ── Fix expander ── */
+[data-testid="stExpander"] {
+    background-color: #FFFFFF !important;
+    border: 1px solid #EBEBEB !important;
+    border-radius: 12px !important;
+}
+[data-testid="stExpander"] summary,
+[data-testid="stExpander"] summary *,
+[data-testid="stExpander"] p {
+    color: #1A1A2E !important;
+}
+
+/* ── Fix success / error / warning boxes ── */
+[data-testid="stAlert"] {
+    background-color: #FFFFFF !important;
+    color: #1A1A2E !important;
+}
 
 /* ── Typography Elements ── */
 .fraunces { font-family: 'Fraunces', serif; }
@@ -60,7 +187,7 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
     font-family: 'Fraunces', serif;
     font-size: 2rem;
     font-weight: 700;
-    color: #555;
+    color: #555 !important;
 }
 
 .bonjour {
@@ -68,7 +195,7 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
     font-style: italic;
     font-size: 4rem;
     font-weight: 700;
-    color: #111;
+    color: #111 !important;
     letter-spacing: -1px;
     margin-bottom: 0.5rem;
     line-height: 1.1;
@@ -77,7 +204,7 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
 .tagline {
     font-family: 'League Spartan', sans-serif;
     font-size: 1.1rem;
-    color: #555;
+    color: #555 !important;
     line-height: 1.6;
     margin-bottom: 0;
 }
@@ -85,7 +212,7 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
 .cta {
     font-family: 'League Spartan', sans-serif;
     font-size: 1rem;
-    color: #333;
+    color: #333 !important;
     margin-top: 0.8rem;
     font-weight: 500;
     margin-bottom: 0;
@@ -94,28 +221,14 @@ html, body, [class*="css"], [data-testid="stAppViewContainer"] {
 .subline {
     font-family: 'League Spartan', sans-serif;
     font-size: 0.9rem;
-    color: #777;
+    color: #777 !important;
     margin-top: 1rem;
     margin-bottom: 2rem;
 }
 
-/* Base button defaults reset */
-div[data-testid="stButton"] button {
-    border-radius: 50px;
-    font-weight: 500;
-    padding: 0.5rem 1.5rem;
-}
-
-/* The actual "Primary" Streamlit Button Override */
-div[data-testid="stButton"] button[kind="primary"] {
-    background-color: #5B4FCF !important;
-    color: #FFFFFF !important;
-    border: none !important;
-}
-
 /* ── Cards ── */
 .card {
-    background: #FFFFFF;
+    background: #FFFFFF !important;
     border: 1px solid #EBEBEB;
     border-radius: 16px;
     padding: 1.8rem 2rem;
@@ -127,7 +240,7 @@ div[data-testid="stButton"] button[kind="primary"] {
     font-family: 'Fraunces', serif;
     font-size: 1.6rem;
     font-weight: 700;
-    color: #1A1A2E;
+    color: #1A1A2E !important;
     margin-bottom: 1.5rem;
 }
 
@@ -135,14 +248,13 @@ div[data-testid="stButton"] button[kind="primary"] {
 .metric-grid { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
 .metric-tile {
     flex: 1; min-width: 200px;
-    background: #FFFFFF;
+    background: #FFFFFF !important;
     border: 1px solid #EBEBEB;
     border-radius: 16px;
     padding: 1.5rem;
     box-shadow: 0 4px 20px rgba(26, 26, 46, 0.03);
 }
 
-/* Left borders */
 .border-red    { border-left: 4px solid #E8503A; }
 .border-indigo { border-left: 4px solid #5B4FCF; }
 
@@ -152,7 +264,7 @@ div[data-testid="stButton"] button[kind="primary"] {
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.5px;
-    color: #7A7A9A; 
+    color: #7A7A9A !important; 
     margin-bottom: 0.5rem; 
 }
 
@@ -160,13 +272,13 @@ div[data-testid="stButton"] button[kind="primary"] {
     font-family: 'Fraunces', serif;
     font-size: 2.2rem;
     font-weight: 700;
-    color: #1A1A2E;
+    color: #1A1A2E !important;
     line-height: 1;
 }
 
 .metric-sub { 
     font-size: 0.85rem; 
-    color: #7A7A9A; 
+    color: #7A7A9A !important; 
     margin-top: 0.5rem; 
 }
 
@@ -180,21 +292,17 @@ div[data-testid="stButton"] button[kind="primary"] {
     margin-bottom: 2rem;
     border: 1px solid #EBEBEB;
 }
+.survival-banner.safe    { background: #E8F7EE !important; }
+.survival-banner.warning { background: #FDF6E3 !important; }
+.survival-banner.danger  { background: #FFF0EE !important; }
 
-.survival-banner.safe    { background: #E8F7EE; }
-.survival-banner.warning { background: #FDF6E3; }
-.survival-banner.danger  { background: #FFF0EE; }
-
-.survival-block {
-    display: flex;
-    flex-direction: column;
-}
+.survival-block { display: flex; flex-direction: column; }
 
 .survival-label {
     font-family: 'DM Sans', sans-serif;
     font-size: 0.85rem;
     font-weight: 500;
-    color: #7A7A9A;
+    color: #7A7A9A !important;
     margin-bottom: 0.3rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -204,7 +312,7 @@ div[data-testid="stButton"] button[kind="primary"] {
     font-family: 'Fraunces', serif;
     font-size: 2.5rem;
     font-weight: 700;
-    color: #1A1A2E;
+    color: #1A1A2E !important;
 }
 
 /* ── Risk badge ── */
@@ -217,9 +325,9 @@ div[data-testid="stButton"] button[kind="primary"] {
     font-size: 1rem;
     letter-spacing: 1px;
 }
-.risk-safe    { background: #3DAA6E; color: #FFFFFF; }
-.risk-warning { background: #F0A500; color: #FFFFFF; }
-.risk-danger  { background: #E8503A; color: #FFFFFF; }
+.risk-safe    { background: #3DAA6E !important; color: #FFFFFF !important; }
+.risk-warning { background: #F0A500 !important; color: #FFFFFF !important; }
+.risk-danger  { background: #E8503A !important; color: #FFFFFF !important; }
 
 /* ── Insight rows ── */
 .insight-row {
@@ -234,34 +342,27 @@ div[data-testid="stButton"] button[kind="primary"] {
     background: #5B4FCF;
     flex-shrink: 0;
 }
-.insight-dot.amber { background: #F0A500; }
-.insight-dot.red   { background: #E8503A; }
-.insight-text { font-size: 1.05rem; color: #1A1A2E; line-height: 1.5; font-weight: 500; }
+.insight-dot.amber { background: #F0A500 !important; }
+.insight-dot.red   { background: #E8503A !important; }
+.insight-text { font-size: 1.05rem; color: #1A1A2E !important; line-height: 1.5; font-weight: 500; }
 
 /* ── Advisory ── */
 .advisory-item {
-    background: rgba(91, 79, 207, 0.05);
+    background: rgba(91, 79, 207, 0.05) !important;
     border-left: 4px solid #5B4FCF;
     padding: 1.2rem 1.5rem;
     margin-bottom: 1rem;
     border-radius: 0 12px 12px 0;
     font-size: 1.05rem;
-    color: #1A1A2E;
+    color: #1A1A2E !important;
     font-weight: 500;
 }
 
-/* ── Table ── */
-.stDataFrame { border: 1px solid #EBEBEB !important; border-radius: 12px; overflow: hidden; }
-
 /* ── Landing Area ── */
-.landing-steps {
-    display: flex;
-    gap: 2rem;
-    margin-top: 2rem;
-}
+.landing-steps { display: flex; gap: 2rem; margin-top: 2rem; }
 .step-card {
     flex: 1;
-    background: #FFFFFF;
+    background: #FFFFFF !important;
     border-radius: 16px;
     padding: 2rem;
     border: 1px solid #EBEBEB;
@@ -271,19 +372,19 @@ div[data-testid="stButton"] button[kind="primary"] {
     font-family: 'Fraunces', serif;
     font-size: 2.5rem;
     font-weight: 700;
-    color: #D6D3F0;
+    color: #D6D3F0 !important;
     margin-bottom: 1rem;
     line-height: 1;
 }
 .step-title {
     font-weight: 700;
     font-size: 1.1rem;
-    color: #1A1A2E;
+    color: #1A1A2E !important;
     margin-bottom: 0.5rem;
 }
 .step-desc {
     font-size: 0.95rem;
-    color: #7A7A9A;
+    color: #7A7A9A !important;
     line-height: 1.5;
 }
 
@@ -354,7 +455,6 @@ def categorize(desc: str) -> str:
 
 
 def parse_dataframe(df: pd.DataFrame):
-    """Normalize columns and extract key fields safely."""
     df.columns = [str(c).strip().lower().replace(" ", "_") for c in df.columns]
 
     desc_col = next((c for c in df.columns if any(k in c for k in
@@ -392,16 +492,12 @@ def parse_dataframe(df: pd.DataFrame):
 
 
 def compute_survival(debits, amt_col, date_col, balance):
-
-    # Use last 30 days safely
     max_date = debits[date_col].max()
-
     if pd.isna(max_date):
         return None
 
     cutoff = max_date - pd.Timedelta(days=30)
     recent = debits[debits[date_col] >= cutoff]
-
     if recent.empty:
         recent = debits.copy()
 
@@ -412,7 +508,6 @@ def compute_survival(debits, amt_col, date_col, balance):
     n_days = recent[date_col].dt.date.nunique()
     burn_rate = total_spent / n_days if n_days > 0 else 0
 
-    #  THESE MUST ALIGN WITH burn_rate (same indentation level)
     days_left = int(balance / burn_rate) if burn_rate > 0 else 999
     zero_date = datetime.today() + timedelta(days=days_left)
     today      = datetime.today()
@@ -438,7 +533,6 @@ def compute_survival(debits, amt_col, date_col, balance):
 
 
 def behavioral_insights(debits, amt_col, date_col):
-    """Return list of (color, text) insight tuples."""
     insights = []
 
     small = debits[debits[amt_col] < 200]
@@ -475,7 +569,6 @@ def behavioral_insights(debits, amt_col, date_col):
 
 
 def smart_advisory(survival, debits, amt_col):
-    """Return list of advisory strings."""
     advs = []
     risk = survival["risk"]
 
@@ -510,18 +603,14 @@ def smart_advisory(survival, debits, amt_col):
 st.markdown("""
 <div class="hero">
   <div class="brand">Thrive</div>
-
   <h1 class="Helo">Helo.</h1>
-
   <p class="tagline">
     Your money should last the month.<br>
     We make sure it does.
   </p>
-
   <p class="cta">
     Upload your bank statement to see where your money is going.
   </p>
-
   <p class="subline">
     Thrive — your financial companion for getting through the semester.
   </p>
@@ -589,7 +678,7 @@ if df_raw is not None:
         st.stop()
 
     if balance == 0.0:
-        st.markdown("<div style='margin-bottom: 1rem'>We couldn't automatically find your current balance.</div>", unsafe_allow_html=True)
+        st.markdown("<div style='margin-bottom: 1rem; color: #1A1A2E;'>We couldn't automatically find your current balance.</div>", unsafe_allow_html=True)
         balance = st.number_input(
             "What's your current account balance? (₹)",
             min_value=0.0, value=0.0, step=100.0
@@ -744,7 +833,6 @@ if df_raw is not None:
         log_df.columns = ["Date", "Description", "Amount (₹)", "Category"]
         log_df["Date"] = log_df["Date"].dt.strftime("%d %b %Y")
         
-        # Prevent CSV injection
         def sanitize_for_csv(val):
             val_str = str(val)
             if val_str.startswith(('=', '+', '-', '@')):
@@ -803,7 +891,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# CSS trick to hide the hidden download button since st.download_button places a physical element.
+# Hide the internal download button
 st.markdown("""
 <style>
 div:has(> button[kind="secondary"][aria-label="hidden_dl"]) {
